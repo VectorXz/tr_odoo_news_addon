@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        <!-- FORM VIEW -->
+        <record model="ir.ui.view" id="category_form_view">
+            <field name="name">category.form</field>
+            <field name="model">trinityroots.category</field>
+            <field name="arch" type="xml">
+                <form string="Category form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="image" widget="image"/>
+                            <field name="publish" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- SEARCH VIEW -->
+        <record model="ir.ui.view" id="category_search_view">
+            <field name="name">category.search</field>
+            <field name="model">trinityroots.category</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="publish"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- override the automatically generated list view for courses -->
+        <record model="ir.ui.view" id="category_tree_view">
+            <field name="name">category.tree</field>
+            <field name="model">trinityroots.category</field>
+            <field name="arch" type="xml">
+                <tree string="Category Tree">
+                    <field name="name"/>
+                    <field name="publish"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="category_list_action">
+            <field name="name">Category</field>
+            <field name="res_model">trinityroots.category</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">No Category here, let's create a new one!</p>
+            </field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="main_news_menu" name="News"/>
+        <!-- the following menuitem should appear *after*
+             its parent openacademy_menu and *after* its
+             action course_list_action -->
+        <menuitem id="news_list_menu" name="All News" parent="main_news_menu"
+                  action="news_list_action"/>
+        <!-- Full id location:
+             action="openacademy.course_list_action"
+             It is not required when it is the same module -->
+        <menuitem id="category_menu" name="News Category"
+                  parent="main_news_menu"
+                  action="category_list_action"/>
+
+</odoo>

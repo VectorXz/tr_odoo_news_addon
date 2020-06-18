@@ -1,0 +1,7 @@
+<odoo>
+
+        <record id="group_admin" model="res.groups">
+            <field name="name">News / Admin</field>
+        </record>
+
+</odoo>

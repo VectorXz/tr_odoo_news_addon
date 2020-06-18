@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        <!-- FORM VIEW -->
+        <record model="ir.ui.view" id="news_form_view">
+            <field name="name">news.form</field>
+            <field name="model">trinityroots.news</field>
+            <field name="arch" type="xml">
+                <form string="News form">
+                    <sheet>
+                        <group string="Main">
+                            <field name="title"/>
+                            <field name="writer"/>
+                            <field name="poster"/>
+                        </group>
+                        <group string="Others">
+                            <field name="image" widget="image"/>
+                            <field name="category" />
+                            <field name="publish" />
+                        </group>
+                        <notebook>
+                            <page string="Content">
+                                <field name="content"/>
+                            </page>
+                            <page string="About">
+                                This is an example of notebooks
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- SEARCH VIEW -->
+        <record model="ir.ui.view" id="news_search_view">
+            <field name="name">news.search</field>
+            <field name="model">trinityroots.news</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="title"/>
+                    <field name="writer"/>
+                    <field name="poster"/>
+                    <field name="category" />
+                    <field name="publish" />
+                    <filter name="my_wrote_news" string="My Wrote News"
+                            domain="[('writer', '=', uid)]"/>
+                    <filter name="my_post_news" string="My Posted News"
+                            domain="[('writer', '=', uid)]"/>
+                    <group string="Group By">
+                        <filter name="by_writer" string="Writer"
+                                context="{'group_by': 'writer'}"/>
+                        <filter name="by_poster" string="Poster"
+                                context="{'group_by': 'poster'}"/>
+                        <filter name="by_category" string="Category"
+                                context="{'group_by': 'category'}"/>
+                        <filter name="by_publish" string="Publish Status"
+                                context="{'group_by': 'publish'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- override the automatically generated list view for courses -->
+        <record model="ir.ui.view" id="news_tree_view">
+            <field name="name">news.tree</field>
+            <field name="model">trinityroots.news</field>
+            <field name="arch" type="xml">
+                <tree string="News Tree">
+                    <field name="title"/>
+                    <field name="writer"/>
+                    <field name="poster"/>
+                    <field name="category" />
+                    <field name="publish" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="news_list_action">
+            <field name="name">News</field>
+            <field name="res_model">trinityroots.news</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">No news here, let's create a new news one!</p>
+            </field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="main_news_menu" name="News"/>
+        <!-- A first level in the left side menu is needed
+             before using action= attribute -->
+        <menuitem id="news_menu" name="News"
+                  parent="main_news_menu"/>
+        <!-- the following menuitem should appear *after*
+             its parent openacademy_menu and *after* its
+             action course_list_action -->
+        <menuitem id="news_list_menu" name="News" parent="main_news_menu"
+                  action="news_list_action"/>
+        <!-- Full id location:
+             action="openacademy.course_list_action"
+             It is not required when it is the same module -->
+
+</odoo>
