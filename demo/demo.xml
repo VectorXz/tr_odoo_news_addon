@@ -1,22 +1,33 @@
 <odoo>
     <data>
+        <record model="trinityroots.category" id="uncategorized">
+            <field name="name">Uncategorized</field>
+        </record>
+
+
         <record model="trinityroots.news" id="news1">
             <field name="title">News #1</field>
             <field name="content">This is news 1</field>
             <field name="writer">1</field>
             <field name="poster">1</field>
+            <field name="category">1</field>
+            <field name="publish">True</field>
         </record>
         <record model="trinityroots.news" id="news2">
             <field name="title">News #2</field>
             <field name="content">This is news 2</field>
             <field name="writer">1</field>
             <field name="poster">1</field>
+            <field name="category">1</field>
+            <field name="publish">True</field>
         </record>
         <record model="trinityroots.news" id="news3">
             <field name="title">News #3</field>
             <field name="content">This is news 3</field>
             <field name="writer">1</field>
             <field name="poster">1</field>
+            <field name="category">1</field>
+            <field name="publish">True</field>
         </record>
     </data>
 </odoo>

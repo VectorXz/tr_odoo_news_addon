@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+import logging
+_logger = logging.getLogger(__name__)
 
 # class news(models.Model):
 #     _name = 'news.news'
@@ -22,6 +24,18 @@ class News(models.Model):
     #find default category
     def _default_category(self):
         return self.env['trinityroots.category'].search([('name', '=', 'Uncategorized')], limit=1).id
+
+    #find_posts_number
+    def _count_posts(self):
+        Posts = self.env['trinityroots.news'].search([])
+        _logger.debug("This is my debug message ! ")
+        _logger.debug("LENGTH : "+str(len(Posts)))
+        if len(Posts) == 0:
+            _logger.debug("True ! ")
+            return True
+        else:
+            _logger.debug("False ! ")
+            return False
 
     #Fields
     title = fields.Char(string="Title", required=True)

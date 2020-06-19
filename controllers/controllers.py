@@ -2,7 +2,7 @@
 from odoo import http
 
 class News(http.Controller):
-    @http.route('/news/news/', auth='public', website=True)
+    @http.route('/news/', auth='public', website=True)
     def index(self, **kw):
         Posts = http.request.env['trinityroots.news']
         return http.request.render('news.index', {

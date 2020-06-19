@@ -7,6 +7,12 @@
                       .card-shadow {
                         box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
                       }
+                      .post-img {
+                        height: 200px;
+                        -o-object-fit: cover;
+                        object-fit: cover;
+                        overflow: hidden;
+                      }
                   </style>
               </xpath>
         </template>
@@ -24,18 +30,29 @@
                             </div>
                         </div>
                         <div class="row pt-3 pb-5">
+                            <t t-if="posts._count_posts()">
+                                <div class="col text-center pt-3">
+                                    <h1>No News Here!</h1>
+                                    <h4>Please come back later.</h4>
+                                </div>
+                            </t>
                             <t t-foreach="posts" t-as="post">
                                 <t t-if="post.publish" ><!-- checking if field is True *-->
                                     <t t-if="post.category.publish">
                                         <div class="col-3">
                                             <div class="card mt-3 card-shadow">
-                                              <img src="http://placekitten.com/200/150" class="card-img-top" />
-                                              <div class="card-body">
-                                                  <h5 class="card-title"><t t-esc="post.title"/></h5>
-                                                  <h6 class="card-subtitle mb-2 text-muted"><t t-esc="post.category.name"/></h6>
-                                                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                                  <a t-attf-href="/news/{{ slug(post) }}" class="card-link">Read more...</a>
-                                              </div>
+                                                <t t-if="post.image">
+                                                    <img class="card-img-top post-img" t-att-src="image_data_uri(post.image)"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <img class="card-img-top post-img" src="http://placekitten.com/200/150"/>
+                                                </t>
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><t t-esc="post.title"/></h5>
+                                                    <h6 class="card-subtitle mb-2 text-muted"><t t-esc="post.category.name"/></h6>
+                                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                                    <a t-attf-href="/news/{{ slug(post) }}" class="card-link">Read more...</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </t>
@@ -62,5 +79,5 @@
             </t>
         </template>
 
-    </data>
+        </data>
 </odoo>
