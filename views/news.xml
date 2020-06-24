@@ -7,6 +7,9 @@
             <field name="model">trinityroots.news</field>
             <field name="arch" type="xml">
                 <form string="News form">
+                    <header>
+                        <button name="_open_content_url" string="View on website" type="object" class="oe_highlight"/>
+                    </header>
                     <sheet>
                         <group string="Main">
                             <field name="title"/>

@@ -2,6 +2,22 @@
 
 from odoo import models, fields, api
 import logging
+from odoo.addons.website.models.website import slugify
+from io import StringIO
+from html.parser import HTMLParser
+import re
+
+class MLStripper(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.reset()
+        self.strict = False
+        self.convert_charrefs= True
+        self.text = StringIO()
+    def handle_data(self, d):
+        self.text.write(d)
+    def get_data(self):
+        return self.text.getvalue()
 _logger = logging.getLogger(__name__)
 
 # class news(models.Model):
@@ -21,6 +37,20 @@ class News(models.Model):
     _description="News"
     _rec_name = 'title'
 
+    def _open_overall_url(self):
+        return {'name': 'Go to website',
+                'res_model': 'ir.actions.act_url',
+                'type': 'ir.actions.act_url',
+                'url': 'news/'
+                }
+
+    def _open_content_url(self):
+        return {'name': 'Go to website',
+                'res_model': 'ir.actions.act_url',
+                'type': 'ir.actions.act_url',
+                'url': 'news/'+slugify(self)
+                }
+
     #find default category
     def _default_category(self):
         return self.env['trinityroots.category'].search([('name', '=', 'Uncategorized')], limit=1).id
@@ -36,6 +66,17 @@ class News(models.Model):
         else:
             _logger.debug("False ! ")
             return False
+
+    def _get_sample_desc(self, post):
+        s = MLStripper()
+        s.feed(post.content)
+        content = s.get_data()
+        content = re.sub("[^\w]", " ",  content).split()
+        content = ' '.join(content)
+        if len(content) > 150:
+            return content[:150]+'...'
+        else:
+            return content
 
     #Fields
     title = fields.Char(string="Title", required=True)

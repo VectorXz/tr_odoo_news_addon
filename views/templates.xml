@@ -13,6 +13,10 @@
                         object-fit: cover;
                         overflow: hidden;
                       }
+
+                      .pagination {
+                        justify-content: center;
+                      }
                   </style>
               </xpath>
         </template>
@@ -22,7 +26,7 @@
             <t t-call="website.layout">
                 <t t-set="title">All News</t>
                 <div class="oe_structure">
-                    <div class="container">
+                    <div class="container mt-5 mb-5">
                         <div class="row pt-3">
                             <div class="col">
                                 <h1>All News</h1>
@@ -40,7 +44,7 @@
                                 <t t-if="post.publish" ><!-- checking if field is True *-->
                                     <t t-if="post.category.publish">
                                         <div class="col-3">
-                                            <div class="card mt-3 card-shadow">
+                                            <div class="card mt-5 card-shadow">
                                                 <t t-if="post.image">
                                                     <img class="card-img-top post-img" t-att-src="image_data_uri(post.image)"/>
                                                 </t>
@@ -50,14 +54,21 @@
                                                 <div class="card-body">
                                                     <h5 class="card-title"><t t-esc="post.title"/></h5>
                                                     <h6 class="card-subtitle mb-2 text-muted"><t t-esc="post.category.name"/></h6>
-                                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                                    <a t-attf-href="/news/{{ slug(post) }}" class="card-link">Read more...</a>
+                                                    <p class="card-text"><t t-esc="posts._get_sample_desc(post)" /></p>
+                                                    <a t-attf-href="/news/{{ slug(post) }}" class="card-link stretched-link">Read more...</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </t>
                                 </t>
                             </t>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <t t-call="website.pager">
+                                    <t t-set="_classes">mt-2 ml-md-2</t>
+                                </t>
+                            </div>
                         </div>
                     </div>
                 </div>
