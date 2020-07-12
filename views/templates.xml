@@ -80,9 +80,37 @@
                 <t t-set="title">User</t>
                 <div class="oe_structure"/>
                 <div class="oe_structure">
+                    <t t-if="news_obj.image">
+                        <style>
+                            .container-bg {
+                                background-image:
+                                linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(255,255,255,0) 90%),
+                                url(<t t-esc="image_data_uri(news_obj.image)"/>);
+                                background-size: cover;
+                                min-height: 60vh;
+                            }
+                        </style>
+                        <div class="container-fluid container-bg"></div>
+                    </t>
+                    <t t-else="">
+                        <style>
+                            .container-bg {
+                                background-image:
+                                linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(255,255,255,0) 90%),
+                                url('http://placekitten.com/1000/400');
+                                background-size: cover;
+                                min-height: 60vh;
+                            }
+                        </style>
+                        <div class="container-fluid container-bg"></div>
+                    </t>
                     <div class="container">
-                        <h3 t-field="news_obj.title" />
-                        <h6>Last modified : <i t-field="news_obj.write_date" t-options='{"format": "long"}'/></h6>
+                        <div class="my-5">
+                            <h1 t-field="news_obj.title" style="font-weight:bold;" />
+                            <h6>Writer : <i t-field="news_obj.writer" /></h6>
+                            <h6>Last modified : <i t-field="news_obj.write_date" t-options='{"format": "long"}'/></h6>
+                            <hr style="border-top: 6px solid rgba(0, 0, 0, 0.1);width: 10vh;margin-left: 0;" />
+                        </div>
                         <div t-field="news_obj.content" />
                     </div>
                 </div>

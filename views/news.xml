@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <form string="News form">
                     <header>
-                        <button name="_open_content_url" string="View on website" type="object" class="oe_highlight"/>
+                        <button name="open_content_url" string="View on website" type="object" class="oe_highlight"/>
                     </header>
                     <sheet>
                         <group string="Main">
@@ -16,17 +16,16 @@
                             <field name="writer"/>
                             <field name="poster"/>
                         </group>
-                        <group string="Others">
-                            <field name="image" widget="image"/>
-                            <field name="category" />
-                            <field name="publish" />
-                        </group>
                         <notebook>
                             <page string="Content">
                                 <field name="content"/>
                             </page>
-                            <page string="About">
-                                This is an example of notebooks
+                            <page string="Others">
+                                <group>
+                                    <field name="category" />
+                                    <field name="publish" />
+                                    <field name="image" widget="image"/>
+                                </group>
                             </page>
                         </notebook>
                     </sheet>

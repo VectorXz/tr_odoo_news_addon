@@ -37,14 +37,14 @@ class News(models.Model):
     _description="News"
     _rec_name = 'title'
 
-    def _open_overall_url(self):
+    def open_overall_url(self):
         return {'name': 'Go to website',
                 'res_model': 'ir.actions.act_url',
                 'type': 'ir.actions.act_url',
                 'url': 'news/'
                 }
 
-    def _open_content_url(self):
+    def open_content_url(self):
         return {'name': 'Go to website',
                 'res_model': 'ir.actions.act_url',
                 'type': 'ir.actions.act_url',

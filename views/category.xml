@@ -56,6 +56,12 @@
             </field>
         </record>
 
+        <record model="ir.actions.act_url" id="show_news_on_website">
+            <field name="name">View on website</field>
+            <field name="url">/news/</field>
+            <field name="target">new</field>
+        </record>
+
         <!-- top level menu: no parent -->
         <menuitem id="main_news_menu" name="News"/>
         <!-- the following menuitem should appear *after*
@@ -69,5 +75,9 @@
         <menuitem id="category_menu" name="News Category"
                   parent="main_news_menu"
                   action="category_list_action"/>
+
+        <menuitem id="view_on_website" name="View on Website"
+                  parent="main_news_menu"
+                  action="show_news_on_website"/>
 
 </odoo>
