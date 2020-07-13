@@ -33,6 +33,33 @@
                                 <h5>You can find all of our news here.</h5>
                             </div>
                         </div>
+                        <div class="row py-3">
+                            <div class="card" style="width:100%">
+                              <div class="card-body">
+                                  <h5 class="card-title">Search News</h5>
+                                  <h6 class="card-subtitle mb-3 text-muted">You can put your search keyword below</h6>
+                                  <form class="form-inline" method="POST" t-attf-action="/news/search">
+                                      <div class="col-7">
+                                          <label for="keyword" style="justify-content: start;">Keyword : </label>
+                                          <input type="text" class="form-control" id="keyword" name="keyword" value="" style="width:100%" />
+                                      </div>
+                                      <div class="col-2">
+                                          <label for="category" style="justify-content: start;">Category : </label>
+                                          <select id="category" class="form-control" name="category" style="width:100%">
+                                              <option value="all">All</option>
+                                              <t t-foreach="all_categ" t-as="categ">
+                                                  <option t-att-value="categ.id"><t t-esc="categ.name" /></option>
+                                              </t>
+                                          </select>
+                                      </div>
+                                      <div class="col">
+                                          <button type="submit" class="btn btn-primary btn-lg btn-block">Search</button>
+                                      </div>
+                                      <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                  </form>
+                              </div>
+                            </div>
+                        </div>
                         <div class="row pt-3 pb-5">
                             <t t-if="posts._count_posts()">
                                 <div class="col text-center pt-3">
@@ -115,6 +142,46 @@
                     </div>
                 </div>
                 <div class="oe_structure"/>
+            </t>
+        </template>
+
+        <!-- search result layout -->
+        <template id="search_result">
+            <t t-call="website.layout">
+                <t t-set="title">News Search Result</t>
+                <div class="oe_structure">
+                    <div class="container mt-5 mb-5">
+                        <div class="row pt-3">
+                            <div class="col">
+                                <h1>News Search Result</h1>
+                            </div>
+                        </div>
+                        <div class="row pt-3 pb-5">
+                            <t t-foreach="all_results" t-as="post">
+                                <t t-if="post.publish" ><!-- checking if field is True *-->
+                                    <t t-if="post.category.publish">
+                                        <div class="col-3">
+                                            <div class="card mt-5 card-shadow">
+                                                <t t-if="post.image">
+                                                    <img class="card-img-top post-img" t-att-src="image_data_uri(post.image)"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <img class="card-img-top post-img" src="http://placekitten.com/200/150"/>
+                                                </t>
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><t t-esc="post.title"/></h5>
+                                                    <h6 class="card-subtitle mb-2 text-muted"><t t-esc="post.category.name"/></h6>
+                                                    <p class="card-text"><t t-esc="all_results._get_sample_desc(post)" /></p>
+                                                    <a t-attf-href="/news/{{ slug(post) }}" class="card-link stretched-link">Read more...</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </t>
+                            </t>
+                        </div>
+                    </div>
+                </div>
             </t>
         </template>
 
