@@ -1,5 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-model_trinityroots_news,model_trinityroots_news,model_trinityroots_news,,1,0,0,0
-model_trinityroots_category,model_trinityroots_category,model_trinityroots_category,,1,0,0,0
-admin_trinityroots_news,admin_trinityroots_news,model_trinityroots_news,group_admin,1,1,1,1
-admin_trinityroots_category,admin_trinityroots_category,model_trinityroots_category,group_admin,1,1,1,1
+access_trinityroots_news,access_trinityroots_news,tr_odoo_news_addon.model_trinityroots_news,news_admin,1,1,1,1
+access_trinityroots_category,access_trinityroots_category,tr_odoo_news_addon.model_trinityroots_category,news_admin,1,1,1,1

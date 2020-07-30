@@ -1,7 +1,23 @@
 <odoo>
 
-        <record id="group_admin" model="res.groups">
-            <field name="name">News / Admin</field>
+        <record id="news_categ" model="ir.module.category">
+            <field name="name">News</field>
+        </record>
+
+        <record id="news_admin" model="res.groups">
+            <field name="name">Administrator</field>
+            <field name="category_id" ref="news_categ" />
+        </record>
+
+        <record id="news_admin_see_all_rule" model="ir.rule">
+            <field name="name">News Administrator Can See All News</field>
+            <field name="model_id" ref="model_trinityroots_news" />
+            <field name="groups" eval="[(4,ref('news_admin'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_create" eval="1" />
+            <field name="perm_unlink" eval="1" />
+            <field name="domain_force">[]</field>
         </record>
 
 </odoo>

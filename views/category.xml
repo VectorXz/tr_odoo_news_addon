@@ -62,13 +62,6 @@
             <field name="target">new</field>
         </record>
 
-        <!-- top level menu: no parent -->
-        <menuitem id="main_news_menu" name="News"/>
-        <!-- the following menuitem should appear *after*
-             its parent openacademy_menu and *after* its
-             action course_list_action -->
-        <menuitem id="news_list_menu" name="All News" parent="main_news_menu"
-                  action="news_list_action"/>
         <!-- Full id location:
              action="openacademy.course_list_action"
              It is not required when it is the same module -->

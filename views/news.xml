@@ -95,15 +95,5 @@
         <menuitem id="main_news_menu" name="News"/>
         <!-- A first level in the left side menu is needed
              before using action= attribute -->
-        <menuitem id="news_menu" name="News"
-                  parent="main_news_menu"/>
-        <!-- the following menuitem should appear *after*
-             its parent openacademy_menu and *after* its
-             action course_list_action -->
-        <menuitem id="news_list_menu" name="News" parent="main_news_menu"
-                  action="news_list_action"/>
-        <!-- Full id location:
-             action="openacademy.course_list_action"
-             It is not required when it is the same module -->
-
+        <menuitem id="news_menu" name="All News" parent="main_news_menu" action="news_list_action" />
 </odoo>

@@ -14,7 +14,7 @@ class News(http.Controller):
         pager = request.website.pager(url='/news', total=posts_count, page=page, step=8, scope=7, url_args=kw)
 
         posts_paged = Posts.search([], limit=8, offset=pager['offset'])
-        return http.request.render('news.index', {
+        return http.request.render('tr_odoo_news_addon.index', {
             'all_categ': http.request.env['trinityroots.category'].search([]),
             'posts': posts_paged,
             'pager': pager
@@ -22,7 +22,7 @@ class News(http.Controller):
 
     @http.route('/news/<model("trinityroots.news"):news>/', auth='public', website=True)
     def read_news(self, news):
-        return http.request.render('news.read_news', {
+        return http.request.render('tr_odoo_news_addon.read_news', {
             'news_obj': news
         })
 
@@ -33,7 +33,7 @@ class News(http.Controller):
             posts_search = Posts.search([('title','ilike',keyword)])
         else:
             posts_search = Posts.search([('title','ilike',keyword), ('category.id','=',category)])
-        return http.request.render('news.search_result', {
+        return http.request.render('tr_odoo_news_addon.search_result', {
             'all_results': posts_search
         })
 
