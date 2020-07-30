@@ -27,14 +27,17 @@ class News(http.Controller):
         })
 
     @http.route('/news/search/', auth='public', website=True)
-    def search_news(self, keyword, category, **kw):
+    def search_news(self, keyword='', category='all', **kw):
         Posts = http.request.env['trinityroots.news']
-        if category == 'All':
+        if category == 'all':
             posts_search = Posts.search([('title','ilike',keyword)])
         else:
             posts_search = Posts.search([('title','ilike',keyword), ('category.id','=',category)])
         return http.request.render('tr_odoo_news_addon.search_result', {
-            'all_results': posts_search
+            'all_results': posts_search,
+            'keyword': keyword,
+            'all_categ': http.request.env['trinityroots.category'].search([]),
+            'sel_categ': int(category) if category != 'all' else category,
         })
 
 #     @http.route('/news/news/objects/', auth='public')

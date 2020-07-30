@@ -156,6 +156,34 @@
                                 <h1>News Search Result</h1>
                             </div>
                         </div>
+                        <div class="row py-3">
+                            <div class="card" style="width:100%">
+                              <div class="card-body">
+                                  <h5 class="card-title">Search News</h5>
+                                  <h6 class="card-subtitle mb-3 text-muted">You can put your search keyword below</h6>
+                                  <form class="form-inline" method="POST" t-attf-action="/news/search">
+                                      <div class="col-7">
+                                          <label for="keyword" style="justify-content: start;">Keyword : </label>
+                                          <input type="text" class="form-control" id="keyword" name="keyword" t-att-value="keyword" style="width:100%" />
+                                      </div>
+                                      <div class="col-2">
+                                          <label for="category" style="justify-content: start;">Category : </label>
+                                          <select id="category" class="form-control" name="category" style="width:100%">
+                                              <option value="all">All</option>
+                                              <t t-foreach="all_categ" t-as="categ">
+                                                <option t-if="categ.id == sel_categ" t-att-value="categ.id" selected=""><t t-esc="categ.name" /></option>
+                                                <option t-else="" t-att-value="categ.id"><t t-esc="categ.name" /></option>
+                                              </t>
+                                          </select>
+                                      </div>
+                                      <div class="col">
+                                          <button type="submit" class="btn btn-primary btn-lg btn-block">Search</button>
+                                      </div>
+                                      <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                  </form>
+                              </div>
+                            </div>
+                        </div>
                         <div class="row pt-3 pb-5">
                             <t t-foreach="all_results" t-as="post">
                                 <t t-if="post.publish" ><!-- checking if field is True *-->
